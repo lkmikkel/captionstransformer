@@ -1,5 +1,5 @@
 from datetime import datetime
-from captionstransformer import core, srt
+from captionstransformer import core
 
 class Reader(core.Reader):
 
@@ -62,7 +62,7 @@ class Reader(core.Reader):
                     pass
         return times[0], times[1]
 
-class Writer(srt.Writer):
+class Writer(core.Writer):
     DOCUMENT_TPL = u"WEBVTT\n\n%s"
     CAPTION_TPL = u"""%(index)s\n%(start)s --> %(end)s\n%(text)s\n"""
 
@@ -72,4 +72,7 @@ class Writer(srt.Writer):
         return {'start': caption.start.strftime('%H:%M:%S.%f')[:-3],
                 'end': caption.end.strftime('%H:%M:%S.%f')[:-3]}
 
-
+    def get_template_info(self, caption):
+        info = super(Writer, self).get_template_info(caption)
+        info['index'] = self.captions.index(caption)
+        return info

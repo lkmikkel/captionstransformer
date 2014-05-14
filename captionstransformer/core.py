@@ -18,11 +18,9 @@ class Reader(object):
         self.captions.append(caption)
 
     def __repr__(self):
-        return u"%s.%s: %s" % (self.__class__.__module__,
+        return u"%s.%s: %s captions" % (self.__class__.__module__,
                                self.__class__.__name__,
-                               "\n".join([caption.text\
-                                          for caption in self.captions
-                                          if hasattr(caption, 'text')]))
+                               len(self.captions))
 
     def close(self):
         self.fileobject.close()
@@ -138,9 +136,9 @@ class Caption(object):
     text = property(get_text, set_text)
 
     def __repr__(self):
-        return u"%s.%s: %s" % (self.__class__.__module__,
-                               self.__class__.__name__,
-                               self.text)
+       return u"%s.%s: %s-%s" % (self.__class__.__module__,
+                              self.__class__.__name__,
+                              self.start, self.end)
 
 
 def get_date(hour=0, minute=0, second=0, millisecond=0, microsecond=0):
