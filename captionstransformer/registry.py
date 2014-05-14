@@ -1,6 +1,7 @@
-from captionstransformer import transcript, ttml, sbv, srt
+from captionstransformer import sbv, srt, transcript, ttml, vtt
 
-REGISTRY = {'transcript':{'id': 'transcript',
+REGISTRY = {
+            'transcript':{'id': 'transcript',
                           'reader': transcript.Reader,
                           'writer': transcript.Writer,
                           'mimetype': 'text/xml',
@@ -18,5 +19,10 @@ REGISTRY = {'transcript':{'id': 'transcript',
             'SRT': {'id': 'SRT',
                     'reader': srt.Reader,
                     'writer': srt.Writer,
+                    'mimetype': 'text/plain',
+                    'extension': '.srt'},
+            'VTT': {'id': 'VTT',
+                    'reader': vtt.Reader,
+                    'writer': vtt.Writer,
                     'mimetype': 'text/plain',
                     'extension': '.srt'}}

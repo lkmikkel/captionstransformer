@@ -1,6 +1,7 @@
 import os
 import sys
 import getopt
+import codecs
 from captionstransformer.registry import REGISTRY
 
 
@@ -54,7 +55,7 @@ def main():
         return
 
     reader = REGISTRY[options['input_format']]['reader'](open(options['input']))
-    writer = REGISTRY[options['output_format']]['writer'](open(options['output'], 'w'))
+    writer = REGISTRY[options['output_format']]['writer'](codecs.open(options['output'], 'w', 'utf-8'))
 
     content = reader.read()
     reader.close()
