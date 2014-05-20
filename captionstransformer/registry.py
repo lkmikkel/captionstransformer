@@ -1,5 +1,5 @@
 import os
-from captionstransformer import sbv, srt, transcript, ttml, vtt
+from captionstransformer import sbv, srt, transcript, ttml, vtt, rt
 
 """
 See https://support.google.com/youtube/answer/2734698?hl=en
@@ -42,8 +42,14 @@ REGISTRY = {
         'mimetype': 'text/plain',
         'extensions': '.vtt'
     },
+    'rt': {
+        'id': 'rt',
+        'reader': rt.Reader,
+        'writer': rt.Writer,    # @TODO will raise NotImplementedError
+        'mimetype': 'text/plain',
+        'extensions': '.rt'
+    }
 }
-
 
 def get_formats(filename):
     "Returns formats that could apply based on a filename"

@@ -1,11 +1,11 @@
 from datetime import datetime, timedelta
 
 class Reader(object):
-    def __init__(self, fileobject):
+    def __init__(self, fileobject, encoding='utf-8'):
         self.fileobject = fileobject
         self.captions = []
         self.rawcontent = None
-        self.encoding = 'utf-8'
+        self.encoding = encoding
 
     def read(self):
         self.rawcontent = self.fileobject.read()
