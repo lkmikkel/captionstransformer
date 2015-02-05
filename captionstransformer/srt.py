@@ -12,7 +12,7 @@ class Reader(vtt.Reader):
 
 class Writer(vtt.Writer):
     DOCUMENT_TPL = u"%s"
-    CAPTION_TPL = u"""%(index)s\n%(start)s --> %(end)s\n%(text)s\n"""
+    CAPTION_TPL = u"""%(index)s\n%(start)s --> %(end)s\n%(text)s\n\n"""
 
     def format_time(self, caption):
         """Return start and end time for the given format"""
