@@ -20,3 +20,7 @@ class Writer(vtt.Writer):
         return {'start': caption.start.strftime('%H:%M:%S,%f')[:-3],
                 'end': caption.end.strftime('%H:%M:%S,%f')[:-3]}
 
+    def get_template_info(self, caption):
+        info = super(Writer, self).get_template_info(caption)
+        info['index'] = self.captions.index(caption) + 1
+        return info
