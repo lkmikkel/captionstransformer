@@ -1,12 +1,12 @@
 from datetime import datetime
 from bs4 import BeautifulSoup
-import re
 from captionstransformer import core
 
 class Reader(core.Reader):
     def text_to_captions(self):
-        soup = BeautifulSoup(re.sub(r"<\?xml .*\?>", '', self.rawcontent), 'xml')
+        soup = BeautifulSoup(open(self.fileobject.name), 'xml')
         texts = soup.find_all('p')
+        #print texts
         for text in texts:
             caption = core.Caption()
             caption.start = self.get_date(text['begin'])
