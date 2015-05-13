@@ -31,7 +31,11 @@ class Reader(core.Reader):
         return self.captions
 
     def get_date(self, time_str):
-        return datetime.strptime(time_str, '%H:%M:%S.%f')
+        try:
+            dt = datetime.strptime(time_str, '%H:%M:%S.%f')
+        except ValueError:
+            dt = datetime.strptime(time_str[0:8], '%H:%M:%S')
+        return dt 
 
 class Writer(core.Writer):
     DOCUMENT_TPL = u"""<tt xml:lang="" xmlns="http://www.w3.org/ns/ttml"><body><div>%s</div></body></tt>"""
