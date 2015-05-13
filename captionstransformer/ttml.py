@@ -3,18 +3,25 @@ from bs4 import BeautifulSoup
 from captionstransformer import core
 
 class Reader(core.Reader):
-    def text_to_captions(self):
+    def read(self):
         soup = BeautifulSoup(open(self.fileobject.name), 'xml')
         texts = soup.find_all('p')
         #print texts
         for text in texts:
+            #print text
             caption = core.Caption()
-            caption.start = self.get_date(text['begin'])
-            caption.end = self.get_date(text['end'])
+            begin = text.get('begin')
+            if begin == None:
+                begin = text.get('tt:begin')
+            caption.start = self.get_date(begin)
+            end = text.get('end')
+            if end == None:
+                end = text.get('tt:end')
+            caption.end = self.get_date(end)
             cap = u''
             for item in text.contents:
                 line = u'%s' % item
-                if line != '<br/>':
+                if line != '<br/>' and line != '<tt:br/>':
                     cap += line
                 else:
                     cap += '\n'
