@@ -9,8 +9,9 @@ class Reader(object):
 
     def read(self):
         self.rawcontent = self.fileobject.read()
-        if type(self.rawcontent) == str:
-            self.rawcontent = self.rawcontent.decode(self.encoding)
+        #print self.rawcontent
+        #if type(self.rawcontent) == str:
+        #    self.rawcontent = self.rawcontent.decode(self.encoding)
         self.text_to_captions()
         return self.captions
 
