@@ -132,7 +132,7 @@ class Caption(object):
             value = str.decode(self.encoding)
         elif type(value) != unicode:
             raise ValueError("text must be either encoded string or unicode")
-        self._text = value
+        self._text = remove_blacklisted_chars(value)
 
     text = property(get_text, set_text)
 
@@ -141,6 +141,13 @@ class Caption(object):
                               self.__class__.__name__,
                               self.start, self.end)
 
+BLACKLISTED_CHARS = [u'\xc296']
+
+def remove_blacklisted_chars(caption):
+    cap_res = None
+    for r in BLACKLISTED_CHARS:
+        cap_res = caption.replace(r, '')
+    return cap_res
 
 def get_date(hour=0, minute=0, second=0, millisecond=0, microsecond=0):
     """return a reference date to 1901-01-01 to work with time"""
