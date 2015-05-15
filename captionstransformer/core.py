@@ -141,12 +141,13 @@ class Caption(object):
                               self.__class__.__name__,
                               self.start, self.end)
 
-BLACKLISTED_CHARS = [u'\xc296']
+BLACKLISTED_CHARS = [u"\u0096"]
 
 def remove_blacklisted_chars(caption):
-    cap_res = None
+    #print caption.encode('unicode_escape')
+    cap_res = caption
     for r in BLACKLISTED_CHARS:
-        cap_res = caption.replace(r, '')
+        cap_res = cap_res.replace(r, '')
     return cap_res
 
 def get_date(hour=0, minute=0, second=0, millisecond=0, microsecond=0):
