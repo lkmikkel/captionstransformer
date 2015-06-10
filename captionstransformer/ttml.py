@@ -1,4 +1,5 @@
 from datetime import datetime
+from lxml import html
 from bs4 import BeautifulSoup
 from captionstransformer import core
 
@@ -22,7 +23,7 @@ class Reader(core.Reader):
             for item in text.contents:
                 line = u'%s' % item
                 if line != '<br/>' and line != '<tt:br/>':
-                    cap += line
+                    cap += html.fromstring(html.fromstring(line).text).text
                 else:
                     cap += '\n'
             caption.text = cap
